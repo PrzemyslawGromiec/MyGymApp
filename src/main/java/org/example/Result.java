@@ -1,12 +1,12 @@
 package org.example;
 
 public class Result {
-    private Excercise excercise;
+    private Exercise exercise;
     private int reps;
     private double weight;
 
-    public Result(Excercise excercise, int reps, double weight) {
-        this.excercise = excercise;
+    public Result(Exercise exercise, int reps, double weight) {
+        this.exercise = exercise;
         this.reps = reps;
         this.weight = weight;
     }

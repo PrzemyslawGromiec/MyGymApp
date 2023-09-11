@@ -1,10 +1,10 @@
 package org.example;
 
-public class Excercise {
+public class Exercise {
     private String name;
     private MuscleGroup muscleGroup;
 
-    public Excercise(String name, MuscleGroup muscleGroup) {
+    public Exercise(String name, MuscleGroup muscleGroup) {
         this.name = name;
         this.muscleGroup = muscleGroup;
     }
