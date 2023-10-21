@@ -94,7 +94,7 @@ public class Application {
     private void displayMenu() {
         System.out.println("What would you like to do?");
         System.out.println("1. Show available training plans.");
-        System.out.println("2. Add the completed workout.");
+        System.out.println("2. Create your own training plan.");
         System.out.println("3. Add your workout results.");
         System.out.println("4. Calculate your current BMI.");
         System.out.println("5. Exit the application.");
