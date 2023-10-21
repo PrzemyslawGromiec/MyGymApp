@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 public class Result {
     private Exercise exercise;
     private int reps;
@@ -11,3 +13,4 @@ public class Result {
         this.weight = weight;
     }
 }
+

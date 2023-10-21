@@ -7,8 +7,8 @@ import java.util.Random;
 public class TrainingPlanGenerator {
     private List<Exercise> chestExercises = new ArrayList<>();
     private List<Exercise> backExercises = new ArrayList<>();
-    private List<Exercise> armExercises = new ArrayList<>();
-    private List<Exercise> legsExercise = new ArrayList<>();
+    private List<Exercise> legsExercises = new ArrayList<>();
+    private List<Exercise> shouldersExercises = new ArrayList<>();
     private List<List<Exercise>> availableTrainingPlans = new ArrayList<>();
     private ExerciseFactory exerciseFactory;
 
@@ -25,11 +25,11 @@ public class TrainingPlanGenerator {
             case "Back":
                 backExercises.add(exercise);
                 break;
-            case "Arm":
-                armExercises.add(exercise);
+            case "Shoulders":
+                shouldersExercises.add(exercise);
                 break;
             case "Legs":
-                legsExercise.add(exercise);
+                legsExercises.add(exercise);
                 break;
             default:
                 System.out.println("Option not available");
@@ -39,19 +39,17 @@ public class TrainingPlanGenerator {
 
     private void updateAvailableTrainingPlans() {
         availableTrainingPlans.clear();
-
         availableTrainingPlans.add(new ArrayList<>(chestExercises));
         availableTrainingPlans.add(new ArrayList<>(backExercises));
-        availableTrainingPlans.add(new ArrayList<>(armExercises));
-        availableTrainingPlans.add(new ArrayList<>(legsExercise));
+        availableTrainingPlans.add(new ArrayList<>(shouldersExercises));
+        availableTrainingPlans.add(new ArrayList<>(legsExercises));
     }
 
     public void initDefaultExercises() {
-        chestExercises = generateTrainingPlan("Chest", 4);
-        backExercises = generateTrainingPlan("Back", 4);
-        //armExercises = generateTrainingPlan("Arm", 4);
-        //legsExercise = generateTrainingPlan("Legs", 4);
-        //todo: dopisac reszte cwiczen w library
+        chestExercises = generateTrainingPlan("Chest", 5);
+        backExercises = generateTrainingPlan("Back", 5);
+        shouldersExercises = generateTrainingPlan("Shoulders", 5);
+        legsExercises = generateTrainingPlan("Legs", 5);
         updateAvailableTrainingPlans();
     }
 
@@ -73,7 +71,7 @@ public class TrainingPlanGenerator {
     }
 
     public List<Exercise> generateTrainingPlan(String bodyPart, int numOfExercises) {
-        List<Exercise> exercises = exerciseFactory.getAvialableExercises(bodyPart);
+        List<Exercise> exercises = exerciseFactory.getAvailableExercises(bodyPart);
         if (numOfExercises > exercises.size()) {
             throw new IllegalArgumentException("Number of exercises exceeds available exercises.");
         }
@@ -93,12 +91,38 @@ public class TrainingPlanGenerator {
                 return new ArrayList<>(chestExercises);
             case "Back":
                 return new ArrayList<>(backExercises);
-            case "Arm":
-                return new ArrayList<>(armExercises);
+            case "Shoulders":
+                return new ArrayList<>(shouldersExercises);
             case "Legs":
-                return new ArrayList<>(legsExercise);
+                return new ArrayList<>(legsExercises);
             default:
                 return new ArrayList<>();
         }
+    }
+
+    public void displayAvailableTrainingPlansForMuscleGroup(String muscleGroup) {
+        List<Exercise> exercises = getAvailableExercisesForMuscleGroup(new MuscleGroup(muscleGroup));
+        System.out.println("Available training plans for " + muscleGroup + ":");
+        for (Exercise exercise : exercises) {
+            System.out.println("- " + exercise.getName());
+        }
+
+    }
+
+    public void displayFullBodyWorkout() {
+        System.out.println("Full body workout:");
+        List<Exercise> fullBodyWorkout = generateFullBodyWorkout();
+        for (Exercise exercise : fullBodyWorkout) {
+            System.out.println("- " + exercise.getName());
+        }
+    }
+
+    private List<Exercise> generateFullBodyWorkout() {
+        List<Exercise> fullBodyWorkout = new ArrayList<>();
+        fullBodyWorkout.addAll(chestExercises.subList(0, Math.min(2, chestExercises.size())));
+        fullBodyWorkout.addAll(backExercises.subList(0, Math.min(2, backExercises.size())));
+        fullBodyWorkout.addAll(shouldersExercises.subList(0, Math.min(2, shouldersExercises.size())));
+        fullBodyWorkout.addAll(legsExercises.subList(0, Math.min(2, legsExercises.size())));
+        return fullBodyWorkout;
     }
 }

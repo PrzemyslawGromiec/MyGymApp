@@ -21,7 +21,24 @@ public class Application {
 
             switch (choice) {
                 case 1:
-                    planGenerator.displayAvailableTrainingPlans();
+                    System.out.println("Would you like to train a specific muscle group or get a full body workout?");
+                    System.out.println("1. Train a specific muscle group.");
+                    System.out.println("2. Get a full body workout.");
+                    int trainingChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (trainingChoice) {
+                        case 1:
+                            System.out.println("Which muscle group would you like to train?");
+                            String muscleGroup = scanner.nextLine();
+                            planGenerator.displayAvailableTrainingPlansForMuscleGroup(muscleGroup);
+                            break;
+                        case 2:
+                            planGenerator.displayFullBodyWorkout();
+                            break;
+                        default:
+                            System.out.println("Incorrect choice. Try again.");
+                    }
+                    //planGenerator.displayAvailableTrainingPlans();
                     //dostepne plany treningowe - TrainingPLanGenerator
                     break;
                 case 2:
@@ -45,12 +62,34 @@ public class Application {
         } while (choice !=5);
     }
 
+    private boolean isValidName(String input) {
+        input = input.trim();
+        return !input.isEmpty() && input.chars().allMatch(Character::isLetter);
+    }
+
+    private String capitalize(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        return Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+    }
+
     private void welcomeMessage() {
         System.out.println("Welcome to the MyGym application!");
         System.out.println("Can I get your name, please?");
-        userName = scanner.nextLine();
+        while (true) {
+            String input = scanner.nextLine();
+            if (isValidName(input)) {
+                userName = capitalize(input.trim());
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter a valid name.");
+            }
+        }
         System.out.println("Hello " + userName + "! Let's get started.");
     }
+
+
 
     private void displayMenu() {
         System.out.println("What would you like to do?");
