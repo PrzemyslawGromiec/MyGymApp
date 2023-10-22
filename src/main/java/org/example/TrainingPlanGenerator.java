@@ -214,4 +214,75 @@ public class TrainingPlanGenerator {
             System.out.println((i + 1) + ". " + muscleGroup.getName());
         }
     }
+
+    public List<WorkoutResult> addWorkoutResult() {
+        List<WorkoutResult> myCompletedWorkout = new ArrayList<>();
+
+        do {
+            System.out.println("What muscle group have you trained today?");
+            System.out.println("You could choose from: ");
+            displayAvailableMuscleGroups();
+            String userInput = scanner.nextLine();
+            String[] trainedMuscleGroups = userInput.split(",");
+
+            for (String number : trainedMuscleGroups) {
+                int muscleChoice = Integer.parseInt(number.trim());
+                if (muscleChoice >= 1 && muscleChoice <= muscleGroups.size()) {
+                    MuscleGroup selectedMuscleGroup = muscleGroups.get(muscleChoice - 1);
+
+                    List<Exercise> availableExercises = exerciseFactory.getAvailableExercises(selectedMuscleGroup.getName());
+
+                    System.out.println("Available exercises for " + selectedMuscleGroup.getName() + ":");
+                    for (int i = 0; i < availableExercises.size(); i++) {
+                        System.out.println((i + 1) + ". " + availableExercises.get(i).getName());
+                    }
+
+                    System.out.print("Select an exercise (enter exercise number): ");
+                    int exerciseChoice = Integer.parseInt(scanner.nextLine());
+
+                    if (exerciseChoice >= 1 && exerciseChoice <= availableExercises.size()) {
+                        Exercise selectedExercise = availableExercises.get(exerciseChoice - 1);
+
+                        System.out.print("Enter the number of sets: ");
+                        int sets = Integer.parseInt(scanner.nextLine());
+
+                        System.out.print("Enter the number of repetitions: ");
+                        int repetitions = Integer.parseInt(scanner.nextLine());
+
+                        System.out.print("Enter the weight used (in kg): ");
+                        double weight = Double.parseDouble(scanner.nextLine());
+
+                        WorkoutResult completedExercise = new WorkoutResult(selectedExercise, sets, repetitions, weight);
+                        myCompletedWorkout.add(completedExercise);
+
+                    } else {
+                        System.out.println("Invalid exercise selection. Please try again.");
+                    }
+
+                } else {
+                    System.out.println("Invalid selection. Please try again.");
+                }
+            }
+
+            System.out.print("Do you want to add another exercise? (yes/no): ");
+        } while (scanner.nextLine().equalsIgnoreCase("yes"));
+
+        return myCompletedWorkout;
+        // Do something with myCompletedWorkout (e.g., save it, display it, etc.)
+    }
+
+    public void displayCompletedWorkout(List<WorkoutResult> completedWorkout) {
+        System.out.println("Completed Workout:");
+
+        for (WorkoutResult result : completedWorkout) {
+            System.out.println("Exercise: " + result.getExercise().getName());
+            System.out.println("Muscle Group: " + result.getExercise().getMuscleGroup().getName());
+            System.out.println("Sets: " + result.getSets());
+            System.out.println("Repetitions: " + result.getRepetitions());
+            System.out.println("Weight (kg): " + result.getWeight());
+            System.out.println();
+        }
+    }
+
+
 }

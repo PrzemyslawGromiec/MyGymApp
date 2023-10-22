@@ -30,10 +30,11 @@ public class Application {
                     planGenerator.displayMyPlan();
                     break;
                 case 4:
-                    //obliczanie bmi
+                    //dodawanie swoich wynikow
+                    planGenerator.displayCompletedWorkout(planGenerator.addWorkoutResult());
                     break;
                 case 5:
-                    //wychodzenie
+                    //obliczanie bmi
                     break;
                 case 6:
                     System.out.println("Good bye for now " + userName + " !");
