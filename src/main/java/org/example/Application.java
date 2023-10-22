@@ -42,8 +42,7 @@ public class Application {
                     //dostepne plany treningowe - TrainingPLanGenerator
                     break;
                 case 2:
-                    //dodawanie nowego cwiczenia
-                    addExercise();
+                    planGenerator.createCustomTrainingPlan();
                     break;
                 case 3:
                     //swoje wyniki
@@ -88,8 +87,6 @@ public class Application {
         }
         System.out.println("Hello " + userName + "! Let's get started.");
     }
-
-
 
     private void displayMenu() {
         System.out.println("What would you like to do?");
