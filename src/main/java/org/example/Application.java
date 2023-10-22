@@ -38,14 +38,12 @@ public class Application {
                         default:
                             System.out.println("Incorrect choice. Try again.");
                     }
-                    //planGenerator.displayAvailableTrainingPlans();
-                    //dostepne plany treningowe - TrainingPLanGenerator
                     break;
                 case 2:
                     planGenerator.createCustomTrainingPlan();
                     break;
                 case 3:
-                    //swoje wyniki
+                    planGenerator.displayMyPlan();
                     break;
                 case 4:
                     //obliczanie bmi
@@ -92,9 +90,10 @@ public class Application {
         System.out.println("What would you like to do?");
         System.out.println("1. Show available training plans.");
         System.out.println("2. Create your own training plan.");
-        System.out.println("3. Add your workout results.");
-        System.out.println("4. Calculate your current BMI.");
-        System.out.println("5. Exit the application.");
+        System.out.println("3. Display custom training plan.");
+        System.out.println("4. Add your workout results.");
+        System.out.println("5. Calculate your current BMI.");
+        System.out.println("6. Exit the application.");
     }
 
     private void addExercise() {

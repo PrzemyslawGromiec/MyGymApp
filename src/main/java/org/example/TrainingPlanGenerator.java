@@ -6,14 +6,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TrainingPlanGenerator {
+    private Scanner scanner = new Scanner(System.in);
+    private List<MuscleGroup> muscleGroups = new ArrayList<>();
     private List<Exercise> chestExercises = new ArrayList<>();
     private List<Exercise> backExercises = new ArrayList<>();
     private List<Exercise> legsExercises = new ArrayList<>();
     private List<Exercise> shouldersExercises = new ArrayList<>();
     private List<List<Exercise>> availableTrainingPlans = new ArrayList<>();
     private ExerciseFactory exerciseFactory;
-    private List<MuscleGroup> muscleGroups = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
+    private List<Exercise> customTrainingPlanGenerated = new ArrayList<>();
 
     public TrainingPlanGenerator(ExerciseFactory exerciseFactory) {
         this.exerciseFactory = exerciseFactory;
@@ -162,6 +163,7 @@ public class TrainingPlanGenerator {
             scanner.nextLine();
             customTrainingPlan.addAll(generateCustomTrainingPlan(selectedMuscleGroups, numOfExercises));
             displayCustomTrainingPlan(customTrainingPlan);
+            customTrainingPlanGenerated.addAll(generateCustomTrainingPlan(selectedMuscleGroups,numOfExercises));
 
             System.out.println("Do you want to select more muscle groups? (yes/no)");
         } while (scanner.nextLine().equalsIgnoreCase("yes"));
@@ -187,10 +189,21 @@ public class TrainingPlanGenerator {
         return customTrainingPlan;
     }
 
-    private void displayCustomTrainingPlan(List<Exercise> trainingPlan) {
+    public void displayCustomTrainingPlan(List<Exercise> trainingPlan) {
         System.out.println("Your custom training plan:");
 
         for (Exercise exercise : trainingPlan) {
+            System.out.println("- " + exercise.getName());
+        }
+    }
+
+    public void displayMyPlan() {
+        if (customTrainingPlanGenerated.isEmpty()) {
+            System.out.println("Custom training plan has not been generated yet.");
+            return;
+        }
+        System.out.println("Your personal training plan:");
+        for (Exercise exercise : customTrainingPlanGenerated) {
             System.out.println("- " + exercise.getName());
         }
     }
