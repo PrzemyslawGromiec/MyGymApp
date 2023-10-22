@@ -21,23 +21,7 @@ public class Application {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Would you like to train a specific muscle group or get a full body workout?");
-                    System.out.println("1. Train a specific muscle group.");
-                    System.out.println("2. Get a full body workout.");
-                    int trainingChoice = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (trainingChoice) {
-                        case 1:
-                            System.out.println("Which muscle group would you like to train?");
-                            String muscleGroup = scanner.nextLine();
-                            planGenerator.displayAvailableTrainingPlansForMuscleGroup(muscleGroup);
-                            break;
-                        case 2:
-                            planGenerator.displayFullBodyWorkout();
-                            break;
-                        default:
-                            System.out.println("Incorrect choice. Try again.");
-                    }
+                    trainSpecificMuscleGroupOrFullBody(planGenerator);
                     break;
                 case 2:
                     planGenerator.createCustomTrainingPlan();
@@ -51,24 +35,15 @@ public class Application {
                 case 5:
                     //wychodzenie
                     break;
+                case 6:
+                    System.out.println("Good bye for now " + userName + " !");
+                    break;
                 default:
-                    System.out.println("Incorrect choince. Try again!");
+                    System.out.println("Incorrect choice. Try again!");
             }
 
 
-        } while (choice !=5);
-    }
-
-    private boolean isValidName(String input) {
-        input = input.trim();
-        return !input.isEmpty() && input.chars().allMatch(Character::isLetter);
-    }
-
-    private String capitalize(String name) {
-        if (name == null || name.isEmpty()) {
-            return name;
-        }
-        return Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+        } while (choice != 6);
     }
 
     private void welcomeMessage() {
@@ -96,13 +71,48 @@ public class Application {
         System.out.println("6. Exit the application.");
     }
 
+    private boolean isValidName(String input) {
+        input = input.trim();
+        return !input.isEmpty() && input.chars().allMatch(Character::isLetter);
+    }
+
+    private String capitalize(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        return Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+    }
+
+    public void trainSpecificMuscleGroupOrFullBody(TrainingPlanGenerator planGenerator) {
+        System.out.println("Would you like to train a specific muscle group or get a full body workout?");
+        System.out.println("1. Train a specific muscle group.");
+        System.out.println("2. Get a full body workout.");
+        int trainingChoice = scanner.nextInt();
+        scanner.nextLine();
+        switch (trainingChoice) {
+            case 1:
+                System.out.println("Which muscle group would you like to train?");
+                planGenerator.displayAvailableMuscleGroups();
+                System.out.println("Enter your choice as a string (e.g: \"Chest)");
+                String muscleGroup = scanner.nextLine();
+                planGenerator.displayAvailableTrainingPlansForMuscleGroup(muscleGroup);
+                break;
+            case 2:
+                planGenerator.displayFullBodyWorkout();
+                break;
+            default:
+                System.out.println("Incorrect choice. Try again.");
+        }
+    }
+
+
     private void addExercise() {
         System.out.println("What is the exercise name:");
         String exerciseName = scanner.nextLine();
         System.out.println("What is the muscle group (Chest, Back, Arm, Legs):");
         String muscleGroupName = scanner.nextLine();
         MuscleGroup group = new MuscleGroup(muscleGroupName);
-        Exercise exercise = new Exercise(exerciseName,group);
-        planGenerator.addExercise(exercise,group);
+        Exercise exercise = new Exercise(exerciseName, group);
+        planGenerator.addExercise(exercise, group);
     }
 }

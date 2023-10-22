@@ -140,7 +140,6 @@ public class TrainingPlanGenerator {
     public void createCustomTrainingPlan() {
         System.out.println("Let's create a custom training plan!");
         displayAvailableMuscleGroups();
-        List<Exercise> customTrainingPlan = new ArrayList<>();
 
         do {
             System.out.print("Enter the numbers of the muscle groups you want to train (for example: 1,3,4): ");
@@ -161,9 +160,8 @@ public class TrainingPlanGenerator {
             System.out.print("Enter the number of exercises you want for each selected muscle group: ");
             int numOfExercises = scanner.nextInt();
             scanner.nextLine();
-            customTrainingPlan.addAll(generateCustomTrainingPlan(selectedMuscleGroups, numOfExercises));
-            displayCustomTrainingPlan(customTrainingPlan);
-            customTrainingPlanGenerated.addAll(generateCustomTrainingPlan(selectedMuscleGroups,numOfExercises));
+            customTrainingPlanGenerated.addAll(generateCustomTrainingPlan(selectedMuscleGroups, numOfExercises));
+            displayCustomTrainingPlan(customTrainingPlanGenerated);
 
             System.out.println("Do you want to select more muscle groups? (yes/no)");
         } while (scanner.nextLine().equalsIgnoreCase("yes"));
