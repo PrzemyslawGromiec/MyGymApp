@@ -1,9 +1,7 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class TrainingPlanGenerator {
     private Scanner scanner = new Scanner(System.in);
@@ -268,7 +266,6 @@ public class TrainingPlanGenerator {
         } while (scanner.nextLine().equalsIgnoreCase("yes"));
 
         return myCompletedWorkout;
-        // Do something with myCompletedWorkout (e.g., save it, display it, etc.)
     }
 
     public void displayCompletedWorkout(List<WorkoutResult> completedWorkout) {
@@ -284,5 +281,53 @@ public class TrainingPlanGenerator {
         }
     }
 
+    public double computeUserBMI() {
+        System.out.println("Let's compute your current BMI");
 
+        double height = 0;
+        double weight = 0;
+
+        while (true) {
+            System.out.println("What is your height (in cm): ");
+            if (scanner.hasNextDouble()) {
+                height = scanner.nextDouble();
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter a valid number for height.");
+                scanner.next();
+            }
+        }
+
+        while (true) {
+            System.out.println("What is your body weight (in kg): ");
+            if (scanner.hasNextDouble()) {
+                weight = scanner.nextDouble();
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter a valid number for weight.");
+                scanner.next();
+            }
+        }
+
+        double heightInM = height / 100;
+        double currentBMI = (weight / (Math.pow(heightInM, 2)));
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        String roundedNum = df.format(currentBMI);
+        double result = Double.parseDouble(roundedNum);
+        System.out.println("Your current BMI is: " + result);
+        return result;
+    }
+
+    public void BMIRange(double result) {
+        if (result < 18.5) {
+            System.out.println("BMI Range: Underweight");
+        } else if (result >= 18.5 && result < 24.9) {
+            System.out.println("BMI Range: Normal Weight");
+        } else if (result >= 25 && result < 29.9) {
+            System.out.println("BMI Range: Overweight");
+        } else {
+            System.out.println("BMI Range: Obesity");
+        }
+    }
 }

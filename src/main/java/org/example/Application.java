@@ -35,6 +35,7 @@ public class Application {
                     break;
                 case 5:
                     //obliczanie bmi
+                    planGenerator.BMIRange(planGenerator.computeUserBMI());
                     break;
                 case 6:
                     System.out.println("Good bye for now " + userName + " !");
@@ -42,8 +43,6 @@ public class Application {
                 default:
                     System.out.println("Incorrect choice. Try again!");
             }
-
-
         } while (choice != 6);
     }
 
