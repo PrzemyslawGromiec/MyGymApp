@@ -104,15 +104,4 @@ public class Application {
                 System.out.println("Incorrect choice. Try again.");
         }
     }
-
-
-    private void addExercise() {
-        System.out.println("What is the exercise name:");
-        String exerciseName = scanner.nextLine();
-        System.out.println("What is the muscle group (Chest, Back, Arm, Legs):");
-        String muscleGroupName = scanner.nextLine();
-        MuscleGroup group = new MuscleGroup(muscleGroupName);
-        Exercise exercise = new Exercise(exerciseName, group);
-        planGenerator.addExercise(exercise, group);
-    }
 }
