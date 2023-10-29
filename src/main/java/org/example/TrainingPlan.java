@@ -2,12 +2,11 @@ package org.example;
 
 import java.util.List;
 
-abstract class TrainigPlan {
-    //nazwa planu treninggowego - np beginner plan
+abstract class TrainingPlan {
     private String name;
     private List<String> muscleGroups;
 
-    public TrainigPlan(String name, List<String> muscleGroups) {
+    public TrainingPlan(String name, List<String> muscleGroups) {
         this.name = name;
         this.muscleGroups = muscleGroups;
     }

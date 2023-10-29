@@ -3,10 +3,10 @@ package org.example;
 import java.time.LocalDate;
 
 public class Training {
-    private LocalDate trainingDate;
-    private TrainigPlan trainigPlan;
+    private final LocalDate trainingDate;
+    private TrainingPlan trainigPlan;
 
-    public Training(LocalDate trainingDate, TrainigPlan trainigPlan) {
+    public Training(LocalDate trainingDate, TrainingPlan trainigPlan) {
         this.trainingDate = trainingDate;
         this.trainigPlan = trainigPlan;
     }
@@ -15,11 +15,11 @@ public class Training {
         return trainingDate;
     }
 
-    public TrainigPlan getTrainigPlan() {
+    public TrainingPlan getTrainigPlan() {
         return trainigPlan;
     }
 
-    public void setTrainigPlan(TrainigPlan trainigPlan) {
+    public void setTrainingPlan(TrainingPlan trainigPlan) {
         this.trainigPlan = trainigPlan;
     }
 }

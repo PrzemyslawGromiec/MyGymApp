@@ -32,6 +32,4 @@ public class WorkoutResult {
     public double getWeight() {
         return weight;
     }
-
-
 }

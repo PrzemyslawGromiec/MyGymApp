@@ -3,10 +3,10 @@ package org.example;
 import java.util.Scanner;
 
 public class Application {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private String userName;
-    private ExerciseLibrary exerciseLibrary = new ExerciseLibrary();
-    private TrainingPlanGenerator planGenerator = new TrainingPlanGenerator(exerciseLibrary);
+    private final ExerciseLibrary exerciseLibrary = new ExerciseLibrary();
+    private final TrainingPlanGenerator planGenerator = new TrainingPlanGenerator(exerciseLibrary);
 
 
     public void run() {
@@ -20,28 +20,13 @@ public class Application {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    trainSpecificMuscleGroupOrFullBody(planGenerator);
-                    break;
-                case 2:
-                    planGenerator.createCustomTrainingPlan();
-                    break;
-                case 3:
-                    planGenerator.displayMyPlan();
-                    break;
-                case 4:
-                    //dodawanie swoich wynikow
-                    planGenerator.displayCompletedWorkout(planGenerator.addWorkoutResult());
-                    break;
-                case 5:
-                    //obliczanie bmi
-                    planGenerator.BMIRange(planGenerator.computeUserBMI());
-                    break;
-                case 6:
-                    System.out.println("Good bye for now " + userName + " !");
-                    break;
-                default:
-                    System.out.println("Incorrect choice. Try again!");
+                case 1 -> trainSpecificMuscleGroupOrFullBody(planGenerator);
+                case 2 -> planGenerator.createCustomTrainingPlan();
+                case 3 -> planGenerator.displayMyPlan();
+                case 4 -> planGenerator.displayCompletedWorkout(planGenerator.addWorkoutResult());
+                case 5 -> planGenerator.BMIRange(planGenerator.computeUserBMI());
+                case 6 -> System.out.println("Good bye for now " + userName + " !");
+                default -> System.out.println("Incorrect choice. Try again!");
             }
         } while (choice != 6);
     }
@@ -90,18 +75,15 @@ public class Application {
         int trainingChoice = scanner.nextInt();
         scanner.nextLine();
         switch (trainingChoice) {
-            case 1:
+            case 1 -> {
                 System.out.println("Which muscle group would you like to train?");
                 planGenerator.displayAvailableMuscleGroups();
                 System.out.println("Enter your choice as a string (e.g: \"Chest)");
                 String muscleGroup = scanner.nextLine();
                 planGenerator.displayAvailableTrainingPlansForMuscleGroup(muscleGroup);
-                break;
-            case 2:
-                planGenerator.displayFullBodyWorkout();
-                break;
-            default:
-                System.out.println("Incorrect choice. Try again.");
+            }
+            case 2 -> planGenerator.displayFullBodyWorkout();
+            default -> System.out.println("Incorrect choice. Try again.");
         }
     }
 }
